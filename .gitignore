@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+env/
+.env
+
+# Logs and PID files
+*.log
+*.pid
+log_output.txt
+log2.txt
+backend.log
+backend.pid
+
+# Node / Frontend
+node_modules/
+dist/
+.DS_Store
+
+# IDEs
+.vscode/
+.idea/

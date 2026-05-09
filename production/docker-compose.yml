@@ -1,0 +1,23 @@
+# production/docker-compose.yml
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ../
+      dockerfile: production/backend/Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - ENVIRONMENT=production
+    volumes:
+      - ../:/app  # Optional: For hot-reloading code during development
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
