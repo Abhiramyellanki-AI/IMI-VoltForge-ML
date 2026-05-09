@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { api, GenerativeDesignResponse } from '../api/client';
+import { api, type GenerativeDesignResponse } from '../api/client';
 
 export default function GenerativeDesign() {
   const [targetEb, setTargetEb] = useState<number>(650.0);
