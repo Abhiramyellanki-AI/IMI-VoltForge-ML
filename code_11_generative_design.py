@@ -125,9 +125,11 @@ def evaluate_fitness(smiles: str, target_eb: float, pipeline, feature_order: lis
         error = abs(predicted_eb - target_eb)
         fitness = -error
         return fitness, predicted_eb
-    except Exception:
-        # If feature extraction fails or RDKit rejects it during descriptor calculation
-        return -9999.0, None
+    except Exception as e:
+        import traceback
+        err = traceback.format_exc()
+        # Raise the error so it propagates to the API response and we can see what went wrong in production
+        raise RuntimeError(f"Fitness evaluation failed for SMILES {smiles}. Internal Error: {e}\n{err}") from e
 
 # -----------------------------------------------------------------------------
 # 3. Genetic Algorithm Core (Evolution)
