@@ -87,8 +87,10 @@ def inverse_design(body: InverseDesignRequest):
             )
             if best_res is None or res.fun < best_res.fun:
                 best_res = res
-        except Exception:
-            continue
+        except Exception as e:
+            import traceback
+            err = traceback.format_exc()
+            raise RuntimeError(f"Optimizer objective evaluation failed. Internal Error: {e}\n{err}") from e
             
     if best_res is None:
         raise HTTPException(status_code=500, detail="Optimizer failed on all starts.")
